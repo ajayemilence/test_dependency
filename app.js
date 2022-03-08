@@ -100,48 +100,14 @@ const sortingResult = (taskArray, dependencyArray) => {
 };
 
 
-newSort = (taskArray, dependencyArray) => {
-    let result = []
-    if (taskArray.length == 0 && dependencyArray.length == 0) {
-        return result
-    } if (dependencyArray.length == 0) {
-        return result = taskArray
-    } else {
 
-        taskArray.map((task) => {
-
-            let dependentArray = []
-            let reverseDependny = []
-            dependencyArray.map((curDepen) => {
-                let dependent = curDepen.substr(0, 1); // first letter of string
-                let dependentOn = curDepen.substr(-1, 1);// last letter of string
-
-                let depArr = [dependent, dependentOn]
-                let depArrRev = [dependentOn, dependent]
-
-                dependentArray.push(depArr);
-                reverseDependny.push(depArrRev);
-            })
-
-        });
-    }
-
-
-
-    return result;
-
-}
-
-
-// Routes
+// Routes 
+// manual testing
 app.post('/ques', (req, res) => {
 
     let taskArray = req.body.task
     let dependenciesArray = req.body.dependencies;
     var ans = sortingResult(taskArray, dependenciesArray);
-
-    var ans2 = sortingResult(['a', 'b', 'c', 'd', 'e', 'f'],
-        ['a =>b', 'a => c', 'a =>b', 'a =>c', 'b => d', 'c=> d', 'e=>f']);
 
     // var ans2 = sortingResult(['a', 'b', 'c', 'd', 'e', 'f'],
     // ["a => b", "c => d"]);
@@ -149,7 +115,6 @@ app.post('/ques', (req, res) => {
         
     //  var ans2 = newSort(["a","b","c"],
     //  ["a => b","b => c"]);
-
 
 
     return res.status(200).json({ success: 1, message: 'Request successful', Result: ans, Result2: ans2 });
