@@ -18,8 +18,6 @@ const sortingResult = (taskArray, dependencyArray) => {
 
                 if (task === dependent) {
                     check = true;
-                    console.log("yassss")
-                    console.log("task", task)
                     let dependArray = matchArrKey.filter(x => x.key === dependent);
                     if (dependArray.length <= 0) {
                         let dependArray = matchArrKey.filter(x => x.key === dependentOn);
@@ -36,8 +34,6 @@ const sortingResult = (taskArray, dependencyArray) => {
             })
 
             if (!check) {
-                console.log("idhae not")
-                console.log("task not", task)
                 let dependArraySecond = matchArrKey.filter(x => x.value === task);
                 if (dependArraySecond.length > 0) {
                     result.push(dependArraySecond[0].value);
