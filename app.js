@@ -64,15 +64,15 @@ const sortingResult = (taskArray, dependencyArray) => {
 
                 if (task === dependent) {
                     check = true;
-                    let dependArray = matchArrKey.filter(x => x.key === dependent);
+                    let dependArray = matchArrKey.filter(x => x.dep === dependent);
                     if (dependArray.length <= 0) {
-                        let dependArray = matchArrKey.filter(x => x.key === dependentOn);
+                        let dependArray = matchArrKey.filter(x => x.dep === dependentOn);
                         if (dependArray.length > 0) {
                             result = [];
                             return result = "Error - this is a cyclic dependency";
                         }
                         else {
-                            matchArrKey.push({ "key": dependent, "value": dependentOn });
+                            matchArrKey.push({ "dep": dependent, "value": dependentOn });
                         }
                     }
 
@@ -83,14 +83,14 @@ const sortingResult = (taskArray, dependencyArray) => {
                 let dependArraySecond = matchArrKey.filter(x => x.value === task);
                 if (dependArraySecond.length > 0) {
                     result.push(dependArraySecond[0].value);
-                    let key = dependArraySecond[0].key;
-                    let Dependent = matchArrKey.filter(x => x.value === key);
+                    let dep = dependArraySecond[0].dep;
+                    let Dependent = matchArrKey.filter(x => x.value === dep);
                     if (Dependent.length > 0) {
                         result.push(Dependent[0].value);
-                        result.push(Dependent[0].key);
+                        result.push(Dependent[0].dep);
                     }
                     else {
-                        result.push(key);
+                        result.push(dep);
                     }
                 }
             }
@@ -122,8 +122,6 @@ newSort = (taskArray, dependencyArray) => {
                 dependentArray.push(depArr);
                 reverseDependny.push(depArrRev);
             })
-            console.log("dependentArray", dependentArray)
-            console.log("reverseDependny", reverseDependny)
 
         });
     }
@@ -140,13 +138,13 @@ app.post('/ques', (req, res) => {
 
     let taskArray = req.body.task
     let dependenciesArray = req.body.dependencies;
-    // var ans = sortingResult(taskArray, dependenciesArray);
-
-    // var ans2 = sortingResult(['a', 'b', 'c', 'd', 'e', 'f'],
-    //     ['a =>b', 'a => c', 'a =>b', 'a =>c', 'b => d', 'c=> d', 'e=>f']);
+    var ans = sortingResult(taskArray, dependenciesArray);
 
     var ans2 = sortingResult(['a', 'b', 'c', 'd', 'e', 'f'],
-    ["a => b", "c => d"]);
+        ['a =>b', 'a => c', 'a =>b', 'a =>c', 'b => d', 'c=> d', 'e=>f']);
+
+    // var ans2 = sortingResult(['a', 'b', 'c', 'd', 'e', 'f'],
+    // ["a => b", "c => d"]);
 
         
     //  var ans2 = newSort(["a","b","c"],
@@ -154,7 +152,7 @@ app.post('/ques', (req, res) => {
 
 
 
-    return res.status(200).json({ success: 1, message: 'Request successful', Result: ans2, Result2: ans2 });
+    return res.status(200).json({ success: 1, message: 'Request successful', Result: ans, Result2: ans2 });
 });
 
 app.listen(3000)

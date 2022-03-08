@@ -1,8 +1,6 @@
-import sortingResult from './ques';
+// import sortingResult from './index.js';
+const SortingResult = require('./ques');
 
-
-describe('test Case', () => {
-  it('Result as ', () => {
-    expect(sortingResult(["a","b"], ["a => b"])).toEqual(["b","a"]);
-  });
-});
+test('task', ()=> {
+    expect(SortingResult([] , [])).toEqual([]);
+})

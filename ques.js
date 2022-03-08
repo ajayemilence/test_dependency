@@ -1,4 +1,4 @@
-const sortingResult = (taskArray, dependencyArray) => {
+const SortingResult = (taskArray, dependencyArray) => {
     let result = [];
 
     // conditions for empty task and dependency
@@ -56,4 +56,4 @@ const sortingResult = (taskArray, dependencyArray) => {
     }
 };
 
-export default sortingResult;
+module.exports = SortingResult;
