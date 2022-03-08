@@ -52,6 +52,11 @@ const SortingResult = (taskArray, dependencyArray) => {
                 }
             }
         })
+        // taskArray.map((task) => {
+        //     if (!result.includes(task)) {
+        //         result.push(task)
+        //     }
+        // });
         return result;
     }
 };
