@@ -1,6 +1,7 @@
 const sortingResult = (taskArray, dependencyArray) => {
     let result = [];
 
+    // conditions for empty task and dependency
     if (taskArray.length <= 0 && dependencyArray.length <= 0) {
         return result;
     }
@@ -18,6 +19,7 @@ const sortingResult = (taskArray, dependencyArray) => {
 
                 if (task === dependent) {
                     check = true;
+                    // checks tp swap they keys of dependencies 
                     let dependArray = matchArrKey.filter(x => x.key === dependent);
                     if (dependArray.length <= 0) {
                         let dependArray = matchArrKey.filter(x => x.key === dependentOn);
@@ -34,6 +36,7 @@ const sortingResult = (taskArray, dependencyArray) => {
             })
 
             if (!check) {
+                // multiple dependinces for same variable
                 let dependArraySecond = matchArrKey.filter(x => x.value === task);
                 if (dependArraySecond.length > 0) {
                     result.push(dependArraySecond[0].value);
