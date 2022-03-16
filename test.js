@@ -58,3 +58,9 @@ describe('Sorting for dependency ["a => b" , "b => c" , "c => a"]  with task  ["
   });
 });
 
+
+describe('Sorting for dependency ["a => b" , "b => c" , "c => a"]  with task  ["a", "b" ,"c" , "d"] should return : \n result  = ["a => b", "c => d"]', () => {
+  it('Sorted by dependency', () => {
+      expect(SortingResult(["a", "g", "b", "c", "d", "e", "f"], ["a => b", "c => d"])).toEqual(["b", "a" ,"g" ,"d","c" , "e" ,"f"]);
+  });
+});
